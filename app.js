@@ -27,27 +27,29 @@ $(document).ready(function() {
         var //workoutType = ["Endurance", "Speed", "Form"],
             workoutType = ["Endurance"],
 
-            pattern = [" Blocks", " Ladder Up", " Ladder Down",
-                " Pyramid Up", " Pyramid Down", " Rounds"
+            pattern = [
+                "Pyramid"
+                //"Blocks", "Ladder", "Pyramid", "Rounds"
             ],
 
-            endurancePatterns = [["Pyramid 3", 1, 2, 3],
-                ["Pyramid 4", 1, 2, 3, 4],
+            /*
+                endurancePatterns = [["Pyramid 3", 1, 2, 3],
+             ["Pyramid 4", 1, 2, 3, 4],
                 ["Pyramid 5", 1, 2, 3, 4, 5]],
+*/
+            //randomise = randomNumber(3, 0),
 
-            randomise = randomNumber(3, 0),
+            randyType = randomNumber(workoutType.length, 0),
 
-            randyP = randomNumber(workoutType.length, 0),
+            randyPattern = randomNumber(pattern.length, 0),
 
-            randyA = randomNumber(pattern.length, 0),
+            //randyEP = randomNumber(endurancePatterns.length, 0),
 
-            randyEP = randomNumber(endurancePatterns.length, 0),
+            randomWorkoutType = workoutType[randyType],
 
-            randomWorkoutType = workoutType[randyP],
+            randomPattern = pattern[randyPattern],
 
-            randomPattern = pattern[randyA],
-
-            randomEndurancePattern = endurancePatterns[randyEP],
+            //randomEndurancePattern = endurancePatterns[randyEP],
 
             fonts = ["'Nothing You Could Do'", "'Rock Salt'", "'Permanent Marker'",
                 "'Kaushan Script'", "'Shadows Into Light Two'", "'Reenie Beanie'",
@@ -66,6 +68,8 @@ $(document).ready(function() {
             if (randomWorkoutType === "Endurance") {
 
                 //  if repeat min=25, repeat max=100, distance = 500
+                var baseDistance = 25, pyramidSteps = 0,
+                    pyramidUp = false, repeatTop = false;
                 //  expect pyramid 3 pattern
                 //  6 x [25,50,75]
                 //
@@ -77,6 +81,69 @@ $(document).ready(function() {
                 //
                 //  given repeat min & max, create min of X even steps bewteen them in increments * pool length
 
+
+                if (randomPattern === "Pyramid") {
+                    //  Pyramid Can be 3, 4 or 5 steps
+                    pyramidSteps = Math.floor(Math.random()*3+3);
+
+                    //  Pyramid can be up or down
+                    //  (pyramidUp will be true (-1) or false (0)
+                    pyramidUp = Math.floor(Math.random()*2-1);
+
+                    //  Pyramid can repeat top or not
+                    //  (pyramidUp will be true (-1) or false (0)
+                    repeatTop = Math.floor(Math.random()*2-1);
+
+                    //  Get total distnace based on pyramid type & base distance
+                    if (repeatTop) {
+                        var pyramidDistance = gaussSum(pyramidSteps) * baseDistance * 2;
+                    }   else {
+                        var pyramidDistance=  gaussSum(pyramidSteps) * baseDistance +
+                            gaussSum(pyramidSteps-1)*baseDistance;
+                    }
+
+                    //How many rounds fit into requested set size?
+                    var rounds = Math.floor(parseInt(totalDist.val()) / pyramidDistance);
+
+                    //check to see if #rounds fit request
+                    //alternatively check to see if setDistance <= requestDistance
+                    if (rounds<1) {
+                        //
+                    }
+
+                    // String output the actual set
+                    practiceSet = pyramidSteps +" Step " + randomPattern  +
+                                   "<br />" + outputPyramid(baseDistance, pyramidSteps, pyramidUp, repeatTop) +
+                                    "<br /> Rounds: " + rounds +
+                                    "<br /> Distance: " + pyramidDistance*rounds;
+
+                    //  If Rounds > 6, request a 2nd pattern
+                }  else {
+
+                    //Logic for other patterns will go here
+                    practiceSet = randomPattern;
+
+                }
+
+                function outputPyramid(base, steps, upDown, repeatTop){
+                    var set = "", i=0, j=0;
+                    for (i=1; i<=steps; i++) {
+                         set += (i*base).toString() + "+";
+                    }
+                    if (repeatTop) {
+                        set +=  (steps)*base.toString() + "+";
+                    }
+                    for (j=steps-1; j>=1; j--) {
+                        set += (j*base).toString();
+                        if (j!=1) {
+                            set+= "+";
+                        }
+                    }
+
+                    return set;
+
+                }
+                /*
                 if (randomEndurancePattern[0] === "Pyramid 3") {
                     rounds = Math.floor(parseInt(totalDist.val()) / (6 * 25));
                     practiceSet = randomEndurancePattern[0] + "<br /> Rounds: " + rounds + "<br />";
@@ -90,12 +157,14 @@ $(document).ready(function() {
                     }
                     practiceSet = randomEndurancePattern[0] + "<br /> Rounds: " + rounds + "<br />";
                 }
-
+                */
+                /*
                 for (i = 1; i < randomEndurancePattern.length; i++) {
                     practiceSet = practiceSet + randomEndurancePattern[i].toString()
                     if (i < randomEndurancePattern.length - 1)
                         practiceSet = practiceSet + ",  ";
                 }
+                */
 
             } else if (randomWorkoutType === "Speed") {
                 practiceSet = "Speed";
@@ -103,17 +172,6 @@ $(document).ready(function() {
             } else {
                 practiceSet = "Form"
             }
-
-            /*
-             if (randomise === 0) {
-             practiceSet = randomWorkoutType + name;
-             } else if (randomise === 1) {
-             practiceSet = name + randomPattern;
-             } else {
-             practiceSet = randomWorkoutType + name +
-             randomPattern;
-             }
-             */
 
 
 

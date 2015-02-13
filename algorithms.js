@@ -13,11 +13,12 @@ function fill (minSteps, maxSteps, stepSize, steps)
     for (var i = 1 ; i < steps -1 ; i++ ) {
         arr[i] = stepSize * Math.round(minSteps + i*factor);
     }
+    console.log("Fill array: " + arr);
     return arr;
 }
-arr = fill(1,10,50,5);
+//arr = fill(1,10,50,5);
 
-console.log(arr);
+
 
 /** Trying to refactor my pyramid stuff**/
 /**  http://betterexplained.com/articles/techniques-for-adding-the-numbers-1-to-100/ **/
@@ -26,8 +27,20 @@ console.log(arr);
 
 function gaussSum (n) {
     return  (n*(n+1)/2);
+    console.log("Sum of Numbers up to " + n + ": " + total);
 }
 
-total = gaussSum(3);
 
-console.log(total);
+
+function randomize (){
+    /*
+     if (randomise === 0) {
+     practiceSet = randomWorkoutType + name;
+     } else if (randomise === 1) {
+     practiceSet = name + randomPattern;
+     } else {
+     practiceSet = randomWorkoutType + name +
+     randomPattern;
+     }
+     */
+}
