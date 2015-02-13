@@ -1,0 +1,27 @@
+depending on the skill level, you have a max value and min value for repetitions
+and since pool size is fixed you can factor the distances, as you said in the beginning
+so you have 1,2,3 1,2,3,4 and 1,2,3,4,5 * pool size * skill level factor
+
+so you choose one from the 1st pattern and check if you are past the intended total distance,
+ then another pattern, etc... until you complete the total distance
+
+ you can add a conditional and filter patterns that are longer than the remaining distance
+
+ also, simulate input and output, then figure the algorithm
+ It's easier to envision the program that way
+ like tests from bonfire
+
+ How would you incorporate a pattern like this? (3x100, 2x100, 1x100) as compared to simply (300,200,100)?
+ crisberrios an hour ago
+ an array with [3,2,1] and then using map to return a factorized array.
+
+ You can also do curve fitting, like... if you have minimum and maximum, and 5 steps,
+ like (1, x, x, x, 5) you can calculate the closest whole numbers that make a linear increase between those
+
+ like using the map function. newArr = oldArr.map(function(item) { return item*100});
+ oldArr is your input array, and newArr is your output array with the factorized items
+ the other function is just rounding. To fill the previous array, you have 1 and 5, so diference is 4 and it has to be filled in 3 spaces
+ hmm no, it should be an integer
+ nah, it's ok...
+ Math.round(4/3) = 1
+ so you add steps of 1

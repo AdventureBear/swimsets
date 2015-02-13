@@ -1,0 +1,49 @@
+
+@import url(http://fonts.googleapis.com/css?family=Give+You+Glory|Walter+Turncoat|Shadows+Into+Light+Two|Reenie+Beanie|Limelight|Ewert|Rock+Salt|Nothing+You+Could+Do|Permanent+Marker|Kaushan+Script);
+
+body {
+    background: #FDF6E3;
+}
+.swim-practice {
+    font-size: 3em;
+    text-align: center;
+    margin-top: 90px;
+}
+.container {
+    margin: 0 auto;
+    text-align: center;
+    width: 650px;
+    position: relative;
+}
+
+input[type="text"], input[type="number"] {
+    background: #FDF6E3;
+    width: 100px;
+    padding: 10px;
+    margin-top: 30px;
+    border: none;
+    border-bottom: solid 2px #c9c9c9;
+    transition: border 0.3s;
+    border-bottom: solid 2px #969696;
+    font-family: "Permanent Marker";
+    font-size: 18pt;
+}
+
+.button {
+    background: #2AA198;
+    font-family: 'Roboto';
+    width: 180px;
+    height: 35px;
+    padding: 4px 0;
+    display: block;
+    margin: 0 auto;
+    border-radius: 30px;
+    line-height: 1.5em;
+    font-size: 1.3em;
+    text-align: center;
+    text-transform: uppercase;
+    color: #FFF;
+
+}
+
+}
